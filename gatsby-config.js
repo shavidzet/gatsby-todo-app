@@ -1,3 +1,7 @@
+/* eslint camelcase: ['error', { properties: 'never' }] */
+
+const path = require('path')
+
 module.exports = {
   siteMetadata: {
     title: 'Gatsby Default Starter',
@@ -19,23 +23,20 @@ module.exports = {
       resolve: 'gatsby-plugin-manifest',
       options: {
         name: 'gatsby-starter-default',
-        // eslint-disable-next-line camelcase
         short_name: 'starter',
-        // eslint-disable-next-line camelcase
         start_url: '/',
-        // eslint-disable-next-line camelcase
         background_color: '#663399',
-        // eslint-disable-next-line camelcase
         theme_color: '#663399',
         display: 'minimal-ui',
         icon: 'src/images/gatsby-icon.png'
         // This path is relative to the root of the site.
       }
+    },
+    {
+      resolve: 'gatsby-plugin-root-import',
+      options: {
+        '@src': path.join(__dirname, 'src')
+      }
     }
-    /*
-     * this (optional) plugin enables Progressive Web App + Offline functionality
-     * To learn more, visit: https://gatsby.dev/offline
-     * `gatsby-plugin-offline`,
-     */
   ]
 }

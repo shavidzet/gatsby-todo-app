@@ -34,6 +34,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-standard": "^4.0.1",
+    "gatsby-plugin-root-import": "^2.0.5",
     "redux-devtools-extension": "^2.13.8"
   },
   "keywords": [

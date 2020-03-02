@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
-import { store, persistor } from './store'
-import Layout from './components/Layout'
+import { store, persistor } from '@src/store'
+import Layout from '@src/components/Layout'
 
 export const App = ({ element }) => {
   return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Seo } from '../components/Layout'
+import { Seo } from '@src/components/Layout'
 
 const SecondPage = () => (
   <div>
