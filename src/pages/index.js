@@ -1,12 +1,11 @@
 import React from 'react'
-import Layout from '../components/layout'
 import Seo from '../components/seo'
 
 const SecondPage = () => (
-  <Layout>
+  <div>
     <Seo title='Todo app' />
     <h1>Hello world</h1>
-  </Layout>
+  </div>
 )
 
 export default SecondPage

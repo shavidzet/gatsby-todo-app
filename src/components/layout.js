@@ -10,7 +10,7 @@ import PropTypes from 'prop-types'
 
 const Layout = ({ children }) => {
   return (
-    <div>
+    <div style={{ background: 'red' }}>
       <main>{children}</main>
     </div>
   )
