@@ -1,17 +1,10 @@
 import { call, put, takeLatest, all } from 'redux-saga/effects'
-import axios from 'axios'
 import { actions, constants } from '@src/modules/Todo'
-
-const Api = {
-  fetchTodos: () => axios.get('https://us-central1-todo-api-e3e2c.cloudfunctions.net/api/todos'),
-  addTodo: (name) => axios.post('https://us-central1-todo-api-e3e2c.cloudfunctions.net/api/todo', { name }),
-  updateTodo: (id, name) => axios.put(`https://us-central1-todo-api-e3e2c.cloudfunctions.net/api/todo?id=${id}`, { name }),
-  deleteTodo: (id, name) => axios.delete(`https://us-central1-todo-api-e3e2c.cloudfunctions.net/api/todo?id=${id}`, { name })
-}
+import { api } from '@src/services'
 
 export function * createTodo (action) {
   try {
-    const response = yield call(Api.addTodo, action.name)
+    const response = yield call(api.addTodo, action.name)
     yield all([
       put(actions.create.success(response)),
       put(actions.read.request())
@@ -24,7 +17,7 @@ export function * createTodo (action) {
 
 export function * readTodos () {
   try {
-    const response = yield call(Api.fetchTodos)
+    const response = yield call(api.fetchTodos)
     yield put(actions.read.success(response))
   } catch (e) {
     const { response, message } = e
@@ -34,7 +27,7 @@ export function * readTodos () {
 
 export function * updateTodo (action) {
   try {
-    const response = yield call(Api.updateTodo, action.id, action.name)
+    const response = yield call(api.updateTodo, action.id, action.name)
     yield all([
       put(actions.update.success(response)),
       put(actions.read.request())
@@ -47,7 +40,7 @@ export function * updateTodo (action) {
 
 export function * deleteTodo (action) {
   try {
-    const response = yield call(Api.deleteTodo, action.id, action.name)
+    const response = yield call(api.deleteTodo, action.id, action.name)
     yield all([
       put(actions.deleteIt.success(response)),
       put(actions.read.request())
