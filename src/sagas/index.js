@@ -1,5 +1,7 @@
+import { sagas as todo } from '@src/modules/Todo'
 
-function * mySaga () {
+function * rootSaga () {
+  yield todo()
 }
 
-export default mySaga
+export default rootSaga

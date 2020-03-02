@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
+import { reducers as todos } from '@src/modules/Todo'
 
 export default combineReducers({
-  test: (state = {}, action) => ({ message: 'hello world' })
+  todos
 })
