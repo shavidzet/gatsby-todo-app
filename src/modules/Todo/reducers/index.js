@@ -13,7 +13,7 @@ const createTodoInitialState = {
   }
 }
 
-const createTodo = (state = createTodoInitialState, action) => {
+export const createTodo = (state = createTodoInitialState, action) => {
   switch (action.type) {
     case constants.TODO_CREATE_REQUESTED:
       return {
@@ -55,7 +55,7 @@ const getTodosInitialState = {
   }
 }
 
-const getTodos = (state = getTodosInitialState, action) => {
+export const getTodos = (state = getTodosInitialState, action) => {
   switch (action.type) {
     case constants.TODOS_GET_REQUESTED:
       return {
@@ -105,7 +105,7 @@ const updateTodoInitialState = {
   }
 }
 
-const updateTodo = (state = updateTodoInitialState, action) => {
+export const updateTodo = (state = updateTodoInitialState, action) => {
   switch (action.type) {
     case constants.TODO_UPDATE_REQUESTED:
       return {
@@ -147,7 +147,7 @@ const deleteTodoInitialState = {
   }
 }
 
-const deleteTodo = (state = deleteTodoInitialState, action) => {
+export const deleteTodo = (state = deleteTodoInitialState, action) => {
   switch (action.type) {
     case constants.TODO_DELETE_REQUESTED:
       return {
@@ -184,7 +184,7 @@ const authPersistConfig = {
   storage: storage
 }
 
-export default combineReducers({
+export const rootReducer = combineReducers({
   createTodo,
   getTodos: persistReducer(authPersistConfig, getTodos),
   updateTodo,

@@ -9,17 +9,7 @@ const Api = {
   deleteTodo: (id, name) => axios.delete(`https://us-central1-todo-api-e3e2c.cloudfunctions.net/api/todo?id=${id}`, { name })
 }
 
-const errorStructure = (type, response, message) => ({
-  type,
-  response,
-  message
-})
-
-function * throwErrors (...args) {
-  yield put(errorStructure(...args))
-}
-
-function * createTodo (action) {
+export function * createTodo (action) {
   try {
     const response = yield call(Api.addTodo, action.name)
     yield all([
@@ -28,21 +18,21 @@ function * createTodo (action) {
     ])
   } catch (e) {
     const { response, message } = e
-    yield throwErrors(actions.create.failure(response, message))
+    yield put(actions.create.failure(response, message))
   }
 }
 
-function * readTodos () {
+export function * readTodos () {
   try {
     const response = yield call(Api.fetchTodos)
     yield put(actions.read.success(response))
   } catch (e) {
     const { response, message } = e
-    yield throwErrors(actions.read.failure(response, message))
+    yield put(actions.read.failure(response, message))
   }
 }
 
-function * updateTodo (action) {
+export function * updateTodo (action) {
   try {
     const response = yield call(Api.updateTodo, action.id, action.name)
     yield all([
@@ -51,11 +41,11 @@ function * updateTodo (action) {
     ])
   } catch (e) {
     const { response, message } = e
-    yield throwErrors(actions.update.failure(response, message))
+    yield put(actions.update.failure(response, message))
   }
 }
 
-function * deleteTodo (action) {
+export function * deleteTodo (action) {
   try {
     const response = yield call(Api.deleteTodo, action.id, action.name)
     yield all([
@@ -64,15 +54,13 @@ function * deleteTodo (action) {
     ])
   } catch (e) {
     const { response, message } = e
-    yield throwErrors(actions.deleteIt.failure(response, message))
+    yield put(actions.deleteIt.failure(response, message))
   }
 }
 
-function * mySaga () {
+export function * rootSaga () {
   yield takeLatest(constants.TODO_CREATE_REQUESTED, createTodo)
   yield takeLatest(constants.TODOS_GET_REQUESTED, readTodos)
   yield takeLatest(constants.TODO_UPDATE_REQUESTED, updateTodo)
   yield takeLatest(constants.TODO_DELETE_REQUESTED, deleteTodo)
 }
-
-export default mySaga
