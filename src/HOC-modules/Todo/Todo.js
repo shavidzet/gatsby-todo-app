@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import {
-  create,
-  read,
-  update,
-  deleteIt
-} from '@src/modules/Todo/actions'
+import * as actions from '@src/HOC-modules/Todo/actions'
 
 const todoItem = (handleUpdate, handleDelete) => (todo) => (
   <li
@@ -17,19 +12,19 @@ const todoItem = (handleUpdate, handleDelete) => (todo) => (
   </li>
 )
 
-function Todo () {
+function Todo ({ moduleName }) {
   const dispatch = useDispatch()
   const [newTodoName, setTodoName] = useState('')
-  const isPostingTodo = useSelector(state => state.todos.createTodo.isFetching)
-  const isPostedTodo = useSelector(state => state.todos.createTodo.response.status === 200)
-  const isReadingTodos = useSelector(state => state.todos.getTodos.isFetching)
-  const isUpdatingTodo = useSelector(state => state.todos.updateTodo.isFetching)
-  const isDeletingTodo = useSelector(state => state.todos.deleteTodo.isFetching)
-  const todos = useSelector(state => state.todos.getTodos.response.data)
+  const isPostingTodo = useSelector(state => state[moduleName].createTodo.isFetching)
+  const isPostedTodo = useSelector(state => state[moduleName].createTodo.response.status === 200)
+  const isReadingTodos = useSelector(state => state[moduleName].getTodos.isFetching)
+  const isUpdatingTodo = useSelector(state => state[moduleName].updateTodo.isFetching)
+  const isDeletingTodo = useSelector(state => state[moduleName].deleteTodo.isFetching)
+  const todos = useSelector(state => state[moduleName].getTodos.response.data)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(create.request(newTodoName))
+    dispatch(actions.create(moduleName).request(newTodoName))
   }
 
   const handleUpdate = (todo) => {
@@ -39,15 +34,15 @@ function Todo () {
       return
     }
 
-    dispatch(update.request(todo.id, updatedTodoName))
+    dispatch(actions.update(moduleName).request(todo.id, updatedTodoName))
   }
 
   const handleDelete = (todo) => {
-    dispatch(deleteIt.request(todo.id))
+    dispatch(actions.deleteIt(moduleName).request(todo.id))
   }
 
   useEffect(() => {
-    dispatch(read.request())
+    dispatch(actions.read(moduleName).request())
   }, [])
 
   useEffect(() => {

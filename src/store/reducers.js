@@ -1,6 +1,19 @@
 import { combineReducers } from 'redux'
-import { reducers as todos } from '@src/modules/Todo'
+
+function allModules (r) {
+  return r
+    .keys()
+    .map(key => r(key))
+    .reduce((state, item) => {
+      return {
+        ...state,
+        [item.moduleName]: item.reducer
+      }
+    }, {})
+}
+
+const modules = allModules(require.context('@src/modules/', true, /index.js$/))
 
 export default combineReducers({
-  todos: todos.rootReducer
+  ...modules
 })
