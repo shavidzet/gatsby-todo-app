@@ -2,16 +2,9 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
 import { actions } from '@src/modules-creator/Todo'
-
-const todoItem = (handleUpdate, handleDelete) => (todo) => (
-  <li
-    key={todo.id}
-  >
-    <span>{todo.name}</span>
-    <button onClick={() => handleUpdate(todo)}>Rename</button>
-    <button onClick={() => handleDelete(todo)}>Delete</button>
-  </li>
-)
+import Button from '@src/components/Button'
+import Input from '@src/components/Input'
+import List from '@src/components/List'
 
 function Todo ({ moduleName }) {
   const dispatch = useDispatch()
@@ -56,11 +49,11 @@ function Todo ({ moduleName }) {
     <div className='App'>
 
       <form onSubmit={handleSubmit}>
-        <input
+        <Input
           onChange={(e) => setTodoName(e.target.value)}
           value={newTodoName}
         />
-        <button>Add</button>
+        <Button>Add</Button>
       </form>
 
       {isReadingTodos ? <h2>{todos.length ? 'Updating' : 'Fetching'} todos in progress...</h2> : false}
@@ -68,11 +61,11 @@ function Todo ({ moduleName }) {
       {isUpdatingTodo ? <h2>Updating todos in progress...</h2> : false}
       {isDeletingTodo ? <h2>Deleting todos in progress...</h2> : false}
 
-      <div>
-        <ul>
-          {todos.map(todoItem(handleUpdate, handleDelete))}
-        </ul>
-      </div>
+      <List
+        data={todos}
+        handleUpdate={handleUpdate}
+        handleDelete={handleDelete}
+      />
     </div>
   )
 }
