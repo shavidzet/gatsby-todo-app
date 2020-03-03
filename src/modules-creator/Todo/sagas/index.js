@@ -1,5 +1,5 @@
 import { call, put, takeLatest, all } from 'redux-saga/effects'
-import { actions, constants } from '@src/HOC-modules/Todo'
+import { actions, constants } from '@src/modules-creator/Todo'
 import { api } from '@src/services'
 
 export const createTodoWithName = (moduleName) => {

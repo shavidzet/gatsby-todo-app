@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import storage from 'redux-persist/lib/storage'
 import { persistReducer } from 'redux-persist'
-import { constants } from '@src/HOC-modules/Todo'
+import { constants } from '@src/modules-creator/Todo'
 
 export const createTodoWithName = (name) => {
   const createTodoInitialState = {

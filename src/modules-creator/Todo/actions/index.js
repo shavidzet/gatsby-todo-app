@@ -1,4 +1,4 @@
-import { constants } from '@src/HOC-modules/Todo'
+import { constants } from '@src/modules-creator/Todo'
 
 const action = (type, payload = {}) =>
   ({ type, ...payload })

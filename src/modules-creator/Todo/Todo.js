@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { actions } from '@src/HOC-modules/Todo'
+import { actions } from '@src/modules-creator/Todo'
 
 const todoItem = (handleUpdate, handleDelete) => (todo) => (
   <li

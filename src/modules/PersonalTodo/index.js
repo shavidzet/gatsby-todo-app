@@ -3,7 +3,7 @@ import React from 'react'
 import Todo, {
   reducers,
   sagas
-} from '@src/HOC-modules/Todo'
+} from '@src/modules-creator/Todo'
 
 export const moduleName = 'PERSONAL'
 
