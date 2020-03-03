@@ -1,8 +1,4 @@
-import { fork, all } from 'redux-saga/effects'
-import {
-  saga as personalTodoSaga
-} from '@src/modules/PersonalTodo'
-import { moduleName } from '../modules/PersonalTodo'
+import { all } from 'redux-saga/effects'
 
 function allModules (r) {
   return r
