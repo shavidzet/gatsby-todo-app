@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
 import { actions } from '@src/modules-creator/Todo'
 
@@ -74,6 +75,10 @@ function Todo ({ moduleName }) {
       </div>
     </div>
   )
+}
+
+Todo.propTypes = {
+  moduleName: PropTypes.string.isRequired
 }
 
 export default Todo
