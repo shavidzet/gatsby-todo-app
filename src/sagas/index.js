@@ -1,18 +1,8 @@
 import { all } from 'redux-saga/effects'
-
-function allModules (r) {
-  return r
-    .keys()
-    .map(key => r(key))
-    .map((item) => {
-      return item.saga()
-    })
-}
-
-const modules = allModules(require.context('@src/modules/', true, /index.js$/))
+import { getAllModuleSagas } from '@src/helpers'
 
 function * rootSaga () {
-  yield all(modules)
+  yield all(getAllModuleSagas())
 }
 
 export default rootSaga
